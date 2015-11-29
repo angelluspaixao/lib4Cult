@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> Test Rotation </title>
+  </head>
+  <body>
+    <script type="text/javascript" src="modules/stage/RectangleLib4Cult.js" > </script>
+    <script type="text/javascript" src="modules/stage/GroupLib4Cult.js" > </script>
+    <script type="text/javascript" src="modules/stage/SceneLib4Cult.js" > </script>
+    <script type="text/javascript" src="modules/stage/StageLib4Cult.js" > </script>
+    <script type="text/javascript" src="src/Lib4Cult.js" > </script>
+    <script type="text/javascript">
+
+      var l4c = new Lib4Cult( "my-canvas", 1000, 500 );
+
+      var scene = l4c.create.scene("rotation");
+
+      var group =  l4c.create.group();
+
+      var rects = [];
+      rects[0] = l4c.create.rectangle( 0, 0, l4c.getWidth() /4, l4c.getHeight() /4, "#000000");
+      rects[1] = l4c.create.rectangle( l4c.getWidth() /4, l4c.getHeight() /4, l4c.getWidth() /4, l4c.getHeight() /4, "#000000" );
+
+      var rect = l4c.create.rectangle( l4c.getWidth() /2, 0, l4c.getWidth() /2, l4c.getHeight() /2, "yellow" );
+
+      group.add(rects[0]);
+      group.add(rects[1]);
+
+      scene.add(group);
+      scene.add(rect);
+
+      l4c.stage.add(scene);
+
+      rect.setRotation(l4c.angles.DEGREES_60);
+
+      group.setRotation(l4c.angles.DEGREES_180);
+
+    </script>
+  </body>
+</html>

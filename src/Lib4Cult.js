@@ -27,19 +27,45 @@ Lib4Cult = function( _id, _width, _height, _container ){
   el.width = _width;
   el.height = _height;
 
+  el.style.border = "solid 1px #000";
+
   var ctx = el.getContext('2d');
 
-  self.position = {
+  var position = {
     x: el.offsetTop,
     y: el.offsetLeft
   }
 
-  self.size = {
+  var size = {
     width: el.width,
     height: el.height
   }
 
-  // el.style.border = "solid 1px #000";
+  self.getX = function(){ return position.x; }
+  self.getY = function(){ return position.y; }
+  self.getWidth = function(){ return size.width; }
+  self.getHeight = function(){ return size.height; }
+
+  self.angles = {
+    DEGREES_0: 0,
+    DEGREES_30: Math.PI /6,
+    DEGREES_45: Math.PI /4,
+    DEGREES_60: Math.PI /3,
+    DEGREES_90: Math.PI /2,
+    DEGREES_120: 2 *Math.PI /3,
+    DEGREES_135: 3 *Math.PI /4,
+    DEGREES_150: 5 *Math.PI /6,
+    DEGREES_180: Math.PI,
+    DEGREES_210: 7 *Math.PI /6,
+    DEGREES_225: 5 *Math.PI /4,
+    DEGREES_240: 4 *Math.PI /3,
+    DEGREES_270: 3 *Math.PI /2,
+    DEGREES_300: 5 * Math.PI /3,
+    DEGREES_315: 7 *Math.PI /4,
+    DEGREES_330: 11*Math.PI /6,
+    DEGREES_360: 0
+  }
+
 
   // Adicionando o 'canvas' no DOM
   self.container.appendChild( el );
@@ -67,6 +93,6 @@ Lib4Cult = function( _id, _width, _height, _container ){
 
   }
 
-  self.stage = new StageLib4Cult( ctx, self.position.x, self.position.y, self.size.width, self.size.height );
+  self.stage = new StageLib4Cult( ctx, position.x, position.y, size.width, size.height );
 
 }

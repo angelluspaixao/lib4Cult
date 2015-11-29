@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> Test Scene </title>
+  </head>
+  <body>
+
+    <script type="text/javascript" src="modules/stage/RectangleLib4Cult.js" > </script>
+    <script type="text/javascript" src="modules/stage/GroupLib4Cult.js" > </script>
+    <script type="text/javascript" src="modules/stage/SceneLib4Cult.js" > </script>
+    <script type="text/javascript" src="modules/stage/StageLib4Cult.js" > </script>
+    <script type="text/javascript" src="src/Lib4Cult.js" > </script>
+
+    <script type="text/javascript">
+
+      var l4c = new Lib4Cult( "my-canvas", 1000, 500 );
+
+      var scenes = [];
+      scenes[0] = l4c.create.scene("zero");
+      scenes[1] = l4c.create.scene("one");
+      scenes[2] = l4c.create.scene("two");
+      scenes[3] = l4c.create.scene("three");
+
+      var rects = [];
+      rects[0] = l4c.create.rectangle( 0, 0, l4c.getWidth() /2, l4c.getHeight() /2, "#FF0000");
+      rects[1] = l4c.create.rectangle( l4c.getWidth() /2, 0, l4c.getWidth() /2, l4c.getHeight() /2, "#FFFF00");
+      rects[2] = l4c.create.rectangle( l4c.getWidth() /2, l4c.getHeight() /2, l4c.getWidth() /2, l4c.getHeight() /2, "#00FF00");
+      rects[3] = l4c.create.rectangle( 0, l4c.getHeight() /2, l4c.getWidth() /2, l4c.getHeight() /2, "#00FFFF");
+
+      for( var i = 0; i < scenes.length; i++ ){
+
+        scenes[i].add( rects[i] );
+        l4c.stage.add( scenes[i] );
+
+      }
+
+    </script>
+  </body>
+</html>
