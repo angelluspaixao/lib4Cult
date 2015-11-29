@@ -11,7 +11,19 @@ var SceneLib4Cult = function( _flag ){
 
   self.add = function( _element ){
 
-    elementsInScene.push( _element );
+    if( typeof _element.push === 'function' ){
+
+      for( var i = 0; i < _element.length; i++ ){
+
+        elementsInScene.push( _element[i] );
+
+      }
+
+    }else{
+
+      elementsInScene.push( _element );
+
+    }
 
   }
 

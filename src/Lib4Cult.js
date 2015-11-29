@@ -46,7 +46,7 @@ Lib4Cult = function( _id, _width, _height, _container ){
   self.getWidth = function(){ return size.width; }
   self.getHeight = function(){ return size.height; }
 
-  self.angles = {
+  self.angle = {
     DEGREES_0: 0,
     DEGREES_30: Math.PI /6,
     DEGREES_45: Math.PI /4,
@@ -66,6 +66,17 @@ Lib4Cult = function( _id, _width, _height, _container ){
     DEGREES_360: 0
   }
 
+  self.pivot = {
+    TOP_LEFT: function( _size ){ return { x: 0, y: 0 } },
+    TOP_CENTER: function( _size ){ return { x: -_size.width /2, y: 0 } },
+    TOP_RIGHT: function( _size ){ return { x: -_size.width, y: 0 } },
+    MIDDLE_LEFT: function( _size ){ return { x: 0, y: -_size.height /2 } },
+    MIDDLE_CENTER: function( _size ){ return { x: -_size.width /2, y: -_size.height /2 } },
+    MIDDLE_RIGHT: function( _size ){ return { x: -_size.width, y: -_size.height /2 } },
+    DOWN_LEFT: function( _size ){ return { x: 0, y: -_size.height } },
+    DOWN_CENTER: function( _size ){ return { x: -_size.width /2, y: -_size.height } },
+    DOWN_RIGHT: function( _size ){ return { x: -_size.width, y: -_size.height } }
+  }
 
   // Adicionando o 'canvas' no DOM
   self.container.appendChild( el );

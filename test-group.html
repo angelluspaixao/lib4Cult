@@ -21,41 +21,40 @@
       grps[3] = l4c.create.group( 0, l4c.getHeight() /2 );
 
       var rects = [];
+
       // First group
-      rects[0] = l4c.create.rectangle( 0, 0, l4c.getWidth() /4, l4c.getHeight() /4, "#000000");
-      rects[1] = l4c.create.rectangle( l4c.getWidth() /4, l4c.getHeight() /4, l4c.getWidth() /4, l4c.getHeight() /4, "#000000" );
+      rects[0] = [
+        l4c.create.rectangle( 0, 0, l4c.getWidth() /4, l4c.getHeight() /4, "#000000"),
+        l4c.create.rectangle( l4c.getWidth() /4, l4c.getHeight() /4, l4c.getWidth() /4, l4c.getHeight() /4, "#000000" )
+      ];
 
       // Second group
-      rects[2] = l4c.create.rectangle( 0, 0, l4c.getWidth() /4, l4c.getHeight() /4, "#7B68EE");
-      rects[3] = l4c.create.rectangle( l4c.getWidth() /4, l4c.getHeight() /4, l4c.getWidth() /4, l4c.getHeight() /4, "#7B68EE" );
+      rects[1] = [
+        l4c.create.rectangle( 0, 0, l4c.getWidth() /4, l4c.getHeight() /4, "#7B68EE"),
+        l4c.create.rectangle( l4c.getWidth() /4, l4c.getHeight() /4, l4c.getWidth() /4, l4c.getHeight() /4, "#7B68EE" )
+      ];
+
 
       // Third group
-      rects[4] = l4c.create.rectangle( 0, 0, l4c.getWidth() /4, l4c.getHeight() /4, "#DC143C");
-      rects[5] = l4c.create.rectangle( l4c.getWidth() /4, l4c.getHeight() /4, l4c.getWidth() /4, l4c.getHeight() /4, "#DC143C" );
+      rects[2] = [
+        l4c.create.rectangle( 0, 0, l4c.getWidth() /4, l4c.getHeight() /4, "#DC143C"),
+        l4c.create.rectangle( l4c.getWidth() /4, l4c.getHeight() /4, l4c.getWidth() /4, l4c.getHeight() /4, "#DC143C" )
+      ];
 
       // Fourth group
-      rects[6] = l4c.create.rectangle( 0, 0, l4c.getWidth() /4, l4c.getHeight() /4, "#FF8C00");
-      rects[7] = l4c.create.rectangle( l4c.getWidth() /4, l4c.getHeight() /4, l4c.getWidth() /4, l4c.getHeight() /4, "#FF8C00" );
+      rects[3] = [
+        l4c.create.rectangle( 0, 0, l4c.getWidth() /4, l4c.getHeight() /4, "#FF8C00"),
+        l4c.create.rectangle( l4c.getWidth() /4, l4c.getHeight() /4, l4c.getWidth() /4, l4c.getHeight() /4, "#FF8C00" )
+      ];
 
       var scene = l4c.create.scene("group");
 
       grps[0].add(rects[0]);
-      grps[0].add(rects[1]);
+      grps[1].add(rects[1]);
+      grps[2].add(rects[2]);
+      grps[3].add(rects[3]);
 
-      grps[1].add(rects[2]);
-      grps[1].add(rects[3]);
-
-      grps[2].add(rects[4]);
-      grps[2].add(rects[5]);
-
-      grps[3].add(rects[6]);
-      grps[3].add(rects[7]);
-
-      for( var i = 0; i < grps.length; i++ ){
-
-        scene.add( grps[i] );
-
-      }
+      scene.add( grps );
 
       l4c.stage.add( scene );
 

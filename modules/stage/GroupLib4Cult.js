@@ -39,7 +39,19 @@ var GroupLib4Cult = function( _positionX, _positionY ){
   // Mehotd for add components in group
   self.add = function( _element ){
 
-    elementsInGroup.push( _element );
+    if( typeof _element.push === 'function'  ){
+
+      for( var i = 0; i < _element.length; i++ ){
+
+        elementsInGroup.push( _element[i] );
+
+      }
+
+    }else{
+
+      elementsInGroup.push( _element );
+
+    }
 
   }
 

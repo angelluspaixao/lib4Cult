@@ -14,12 +14,41 @@ var StageLib4Cult = function( _context, _canvasX, _canvasY, _canvasWidth, _canva
 
   self.add = function( _scene ){
 
-    scenesForManager[ _scene.flag ] = _scene;
-    currentScene = _scene;
+    if( typeof _scene.push === 'function' ){
+
+      for( var i = 0; i < _scene.length; i++ ){
+
+        if( typeof _scene[i].flag === 'string' ){
+
+          scenesForManager[ _scene[i].flag ] = _scene[i];
+          currentScene = _scene[i];
+
+        }else{
+
+          console.error("Sorry but only possible add Scene");
+
+        }
+
+      }
+
+    }else{
+
+      if( typeof _scene.flag === 'string' ){
+
+        scenesForManager[ _scene.flag ] = _scene;
+        currentScene = _scene;
+
+      }else{
+
+        console.error("Sorry but only possible add Scene");
+
+      }
+
+    }
 
   }
 
-  self.goTo = function( _flag ){
+  self.setScene = function( _flag ){
 
     currentScene =  scenesForManager[ _flag ];
 

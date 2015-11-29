@@ -2,6 +2,8 @@ var RectangleLib4Cult = function( _positionX, _positionY, _sizeWidth, _sizeHeigh
 
   var self = this;
 
+  var pivot = { x: 0, y: 0 };
+
   var position = {
     x: _positionX,
     y: _positionY
@@ -12,17 +14,12 @@ var RectangleLib4Cult = function( _positionX, _positionY, _sizeWidth, _sizeHeigh
     height: _sizeHeight
   }
 
-  var pivot = {
-    x: position.x,
-    y: position.y
-  }
-
   var color = _hexColor;
 
   var rotation = 0;
 
   var layer = 0;
-  
+
   self.setRotation = function( _degrees ){ rotation = _degrees; }
 
   self.setLayer = function( _index ){ layer = _index; }
@@ -39,19 +36,21 @@ var RectangleLib4Cult = function( _positionX, _positionY, _sizeWidth, _sizeHeigh
   self.getLayer = function(){ return layer; }
 
   self.getRotation = function(){ return rotation; }
-  self.setPivot = function( x, y ){  }
+
+  self.setPivot = function( _pivot ){ pivot = _pivot( size ); }
 
   self.update = function(){
-
+    
   }
 
   self.render = function( _context ){
 
     _context.save();
+    _context.fillStyle = color;
     _context.translate( position.x, position.y );
     _context.rotate( rotation );
-    _context.fillStyle = color;
-    _context.fillRect( 0, 0, size.width, size.height );
+    _context.fillRect( pivot.x, pivot.y, size.width, size.height );
+    _context.fillRect( 0, 0, 5, 5 );
     _context.restore();
 
   }
