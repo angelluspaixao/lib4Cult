@@ -3,6 +3,8 @@ var GroupLib4Cult = function( _positionX, _positionY ){
   // Parse main scope
   var self = this;
 
+  var alpha = 1;
+
   // Vector for elements inside group
   var elementsInGroup = [];
 
@@ -16,9 +18,23 @@ var GroupLib4Cult = function( _positionX, _positionY ){
     }
   }
 
+  var pivot = { x: 0, y: 0 };
+
   var layer = 0;
 
   var rotation = 0;
+
+  self.setOpacity = function( _alpha ){
+
+    alpha = _alpha;
+
+    for( var i = 0; i < elementsInGroup.length; i++ ){
+
+      elementsInGroup[i].setOpacity( alpha );
+
+    }
+
+  }
 
   self.setRotation = function( _degrees ){
 
@@ -26,12 +42,27 @@ var GroupLib4Cult = function( _positionX, _positionY ){
 
     for( var i = 0; i < elementsInGroup.length; i++ ){
 
-      elementsInGroup[i].setRotation( _degrees );
+      elementsInGroup[i].setRotation( rotation );
 
     }
 
   }
+
+  self.setPivot = function( _pivot ){
+
+    pivot = _pivot;
+
+    for( var i = 0; i < elementsInGroup.length; i++ ){
+
+      elementsInGroup[i].setPivot( pivot );
+
+    }
+
+  }
+
   self.setLayer = function( _index ){ layer = _index; }
+
+  self.getOpacity = function(){ return alpha; }
 
   self.getRotation = function(){ return rotation; }
   self.getLayer = function(){ return layer; }

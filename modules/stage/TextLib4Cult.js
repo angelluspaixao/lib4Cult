@@ -1,8 +1,14 @@
-var RectangleLib4Cult = function( _positionX, _positionY, _sizeWidth, _sizeHeight, _color ){
+var TextLib4Cult = function( _text, _positionX, _positionY, _fontSize, _hexColor, _fontType ){
 
   var self = this;
 
   var alpha = 1;
+
+  var text = _text;
+
+  var fontSize = _fontSize || _hexColor || 14;
+
+  var fontType = _fontType;
 
   var pivot = { x: 0, y: 0 };
 
@@ -12,35 +18,17 @@ var RectangleLib4Cult = function( _positionX, _positionY, _sizeWidth, _sizeHeigh
   }
 
   var size = {
-    width: _sizeWidth,
-    height: _sizeHeight
+    width: fontSize *text.length,
+    height: fontSize
   }
 
-  var scale = { x: 1, y: 1 }
-
-  var color = _color || "#000000";
+  var color = _hexColor || "#000000";
 
   var rotation = 0;
 
   var layer = 0;
 
-  self.setScale = function( _x, _y ){
-
-    if( arguments.length > 1 ){
-
-      scale = { x: arguments[0], y: arguments[1] }
-      
-    }else{
-
-      scale = { x: arguments[0], y: arguments[0] }
-
-    }
-
-  }
-
   self.setOpacity = function( _alpha ){ alpha = _alpha;  }
-
-  self.setColor = function( _color ){ color = _color; }
 
   self.setPivot = function( _pivot ){ pivot = _pivot( size ); }
 
@@ -56,9 +44,7 @@ var RectangleLib4Cult = function( _positionX, _positionY, _sizeWidth, _sizeHeigh
 
   self.getOpacity = function(){ return alpha; }
 
-  self.getColor = function(){ return color; }
-
-  self.getPivot = function(){ return pivot; }
+  self.getPivot = function(){ return pivot }
 
   self.getRotation = function(){ return rotation; }
 
@@ -66,9 +52,6 @@ var RectangleLib4Cult = function( _positionX, _positionY, _sizeWidth, _sizeHeigh
 
   self.getY = function(){ return position.y; }
   self.getX = function(){ return position.x; }
-
-  self.getScaleX = function(){ return scale.x; }
-  self.getScaleY = function(){ return scale.y; }
 
   self.update = function(){
 
@@ -78,10 +61,10 @@ var RectangleLib4Cult = function( _positionX, _positionY, _sizeWidth, _sizeHeigh
 
     _context.save();
     _context.fillStyle = color;
-    _context.globalAlpha = alpha;
+    _context.font = fontSize + fontType;
     _context.translate( position.x, position.y );
     _context.rotate( rotation );
-    _context.fillRect( pivot.x, pivot.y, size.width *scale.x, size.height *scale.y );
+    _context.fillText( text, pivot.x, pivot.y );
     _context.restore();
 
   }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> Test Text </title>
+  </head>
+  <body>
+    <script type="text/javascript" src="modules/stage/TextLib4Cult.js" > </script>
+    <script type="text/javascript" src="modules/stage/RectangleLib4Cult.js" > </script>
+    <script type="text/javascript" src="modules/stage/GroupLib4Cult.js" > </script>
+    <script type="text/javascript" src="modules/stage/SceneLib4Cult.js" > </script>
+    <script type="text/javascript" src="modules/stage/StageLib4Cult.js" > </script>
+    <script type="text/javascript" src="src/Lib4Cult.js" > </script>
+    <script type="text/javascript">
+
+      var l4c = new Lib4Cult('my-canvas', 450, 450);
+
+      var txt = l4c.create.text("Guilherme Paixão", 310, 370, 50, "red", l4c.font.TREBUCHET );
+
+      txt.setPivot( l4c.pivot.MIDDLE_CENTER );
+      txt.setRotation( l4c.angle.DEGREES_45 );
+
+      var scene = l4c.create.scene("primeira");
+
+      scene.add( txt );
+
+      l4c.stage.add( scene );
+
+    </script>
+  </body>
+</html>

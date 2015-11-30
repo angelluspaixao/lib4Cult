@@ -78,6 +78,20 @@ Lib4Cult = function( _id, _width, _height, _container ){
     DOWN_RIGHT: function( _size ){ return { x: -_size.width, y: -_size.height } }
   }
 
+  self.font = {
+    ARIAL: "px Arial",
+    VERDANA: "px Verdana",
+    COMIC_SANS: "px Comic Sans MS",
+    AHARONI: "px Aharoni",
+    CALIBRI: "px Calibri",
+    CONSOLAS: "px Consolas",
+    COURIER_NEW: "px Courier New",
+    EUPHEMIA: "px Euphemia",
+    IMPACT: "px Impact",
+    TAHOMA: "px Tahoma",
+    TREBUCHET: "px Trebuchet MS"
+  }
+
   // Adicionando o 'canvas' no DOM
   self.container.appendChild( el );
 
@@ -98,6 +112,13 @@ Lib4Cult = function( _id, _width, _height, _container ){
     group: function( _positionX, _positionY ){
 
       var o = new GroupLib4Cult( _positionX, _positionY );
+      return o;
+
+    },
+
+    text: function( _text, _positionX, _positionY, _fontSize, _color, _fontType ){
+
+      var o = new TextLib4Cult( _text, _positionX, _positionY, _fontSize, _color, _fontType );
       return o;
 
     }
