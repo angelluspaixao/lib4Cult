@@ -3,49 +3,22 @@
 * @author Guilherme Paixão
 */
 
-Lib4Cult = function( _id, _width, _height, _container ){
+Lib4Cult = function( _id, _sizeWidth, _sizeHeight, _container ){
 
+  // Parse scope of Class 'Lib4Cult'
   var self = this;
 
-  // Resetando o CSS do Body
-  document.body.style.margin = "0px";
-  document.body.style.padding = "0px";
+  // -- Attributes
+  var mode = { development: false }
+  ,   container = document.getElementById( _container ) || document.body
+  ,   id = _id || "l4c-canvas"
+  ,   position = { x: 0, y: 0 }
+  ,   size = { width: _sizeWidth, height: _sizeHeight }
+  ,   canvas = document.createElement('canvas')
+  ,   context = canvas.getContext('2d')
+  ;
 
-  if( typeof _id !== 'string' || _id === undefined ){
-
-    console.error( "asas" );
-    return
-
-  }
-
-  // Declarando e settando a propriedades
-  self.container = document.getElementById(_container) || document.body;
-  self.id = _id;
-
-  // Criando o 'canvas'
-  var el = document.createElement('canvas');
-  el.width = _width;
-  el.height = _height;
-
-  el.style.border = "solid 1px #000";
-
-  var ctx = el.getContext('2d');
-
-  var position = {
-    x: el.offsetTop,
-    y: el.offsetLeft
-  }
-
-  var size = {
-    width: el.width,
-    height: el.height
-  }
-
-  self.getX = function(){ return position.x; }
-  self.getY = function(){ return position.y; }
-  self.getWidth = function(){ return size.width; }
-  self.getHeight = function(){ return size.height; }
-
+  // [ CONST ]
   self.angle = {
     DEGREES_0: 0,
     DEGREES_30: Math.PI /6,
@@ -79,22 +52,78 @@ Lib4Cult = function( _id, _width, _height, _container ){
   }
 
   self.font = {
-    ARIAL: "px Arial",
-    VERDANA: "px Verdana",
-    COMIC_SANS: "px Comic Sans MS",
-    AHARONI: "px Aharoni",
-    CALIBRI: "px Calibri",
-    CONSOLAS: "px Consolas",
-    COURIER_NEW: "px Courier New",
-    EUPHEMIA: "px Euphemia",
-    IMPACT: "px Impact",
-    TAHOMA: "px Tahoma",
-    TREBUCHET: "px Trebuchet MS"
+    ARIAL: "Arial",
+    VERDANA: "Verdana",
+    COMIC_SANS: "Comic Sans MS",
+    AHARONI: "Aharoni",
+    CALIBRI: "Calibri",
+    CONSOLAS: "Consolas",
+    COURIER_NEW: "Courier New",
+    EUPHEMIA: "Euphemia",
+    IMPACT: "Impact",
+    TAHOMA: "Tahoma",
+    TREBUCHET: "Trebuchet MS"
   }
 
-  // Adicionando o 'canvas' no DOM
-  self.container.appendChild( el );
+  // Reset the style of body [ DOM ]
+  document.body.style.margin = "0px";
+  document.body.style.padding = "0px";
 
+  // Parse function for loop of app
+  window.requestAnimFrame = (function(){
+    return  window.requestAnimationFrame       ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame    ||
+            function( callback ){
+              window.setTimeout(callback, 1000 / 60);
+            };
+  })();
+
+  // -- Methods
+
+  // [ INIT ] -- Settings for instance this Class 'Lib4Cult'
+  canvas.id = id;
+  canvas.offsetLeft = position.x;
+  canvas.offsetTop = position.y;
+  canvas.width = size.width;
+  canvas.height = size.height;
+  container.appendChild( canvas );
+
+  // [ SET ]
+  self.mode = {
+
+    development:  function( _debug ){
+
+      mode.development = _debug;
+      if( mode.development ){
+
+        canvas.style.border = "solid 1px #000";
+
+      }else{
+
+        canvas.style.border = "none";
+
+      }
+
+    }
+
+  }
+  self.setContainer = function( _container ){
+
+    container = document.getElementById( _container );
+    container.appendChild( canvas );
+
+  }
+
+  // [ GET ]
+  self.getX = function(){ return position.x; }
+  self.getY = function(){ return position.y; }
+  self.getWidth = function(){ return size.width; }
+  self.getHeight = function(){ return size.height; }
+  self.getContainer = function(){ return container; }
+  self.getId = function(){ return id; }
+
+  // Object for helper create elements
   self.create = {
 
     scene: function( _flag ){
@@ -103,28 +132,22 @@ Lib4Cult = function( _id, _width, _height, _container ){
     },
 
     rectangle: function( _positionX, _positionY, _sizeWidth, _sizeHeight, _hexColor ){
-
       var o = new RectangleLib4Cult( _positionX, _positionY, _sizeWidth, _sizeHeight, _hexColor );
       return o;
-
     },
 
     group: function( _positionX, _positionY ){
-
       var o = new GroupLib4Cult( _positionX, _positionY );
       return o;
-
     },
 
     text: function( _text, _positionX, _positionY, _fontSize, _color, _fontType ){
-
       var o = new TextLib4Cult( _text, _positionX, _positionY, _fontSize, _color, _fontType );
       return o;
-
     }
 
   }
 
-  self.stage = new StageLib4Cult( ctx, position.x, position.y, size.width, size.height );
+  self.stage = new StageLib4Cult( context, position.x, position.y, size.width, size.height );
 
 }

@@ -1,16 +1,16 @@
 var StageLib4Cult = function( _context, _canvasX, _canvasY, _canvasWidth, _canvasHeight ){
 
+  // Parse scope of Class 'StageLib4Cult'
   var self = this;
 
-  var scenesForManager = {};
+  // -- Attributes
 
-  var currentScene = null;
+  // Array for manager scenes in stage
+  var scenesForManager = {}
+  ,   currentScene = null
+  ;
 
-  self.getCurrent = function(){
-
-    return currentScene.flag;
-
-  }
+  // -- Methods
 
   self.add = function( _scene ){
 
@@ -25,7 +25,7 @@ var StageLib4Cult = function( _context, _canvasX, _canvasY, _canvasWidth, _canva
 
         }else{
 
-          console.error("Sorry but only possible add Scene");
+          console.error("Stage::add - Sorry but only possible add Scene");
 
         }
 
@@ -40,7 +40,7 @@ var StageLib4Cult = function( _context, _canvasX, _canvasY, _canvasWidth, _canva
 
       }else{
 
-        console.error("Sorry but only possible add Scene");
+        console.error("Stage::add - Sorry but only possible add Scene");
 
       }
 
@@ -48,11 +48,8 @@ var StageLib4Cult = function( _context, _canvasX, _canvasY, _canvasWidth, _canva
 
   }
 
-  self.setScene = function( _flag ){
-
-    currentScene =  scenesForManager[ _flag ];
-
-  }
+  self.setScene = function( _flag ){ currentScene =  scenesForManager[ _flag ]; }
+  self.getCurrentScene = function(){ return currentScene.flag; }
 
   var update = function(){
 
@@ -64,6 +61,7 @@ var StageLib4Cult = function( _context, _canvasX, _canvasY, _canvasWidth, _canva
   var render = function(){
 
     _context.clearRect( _canvasX, _canvasY, _canvasWidth, _canvasHeight );
+
     if( currentScene )
       currentScene.render( _context );
 
@@ -73,8 +71,9 @@ var StageLib4Cult = function( _context, _canvasX, _canvasY, _canvasWidth, _canva
 
     update();
     render();
-    // console.log("Eu aqui no loop do Manager");
-    window.setTimeout(loop, 30);
+
+    window.requestAnimFrame( loop, 30 );
+
   }
 
   loop();
